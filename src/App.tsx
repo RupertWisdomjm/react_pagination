@@ -8,6 +8,7 @@ export const App: React.FC = () => {
   //State
   const [selectOption, setSelectOption] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
+  const totalItems = 42;
 
   //Handle change
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -21,6 +22,7 @@ export const App: React.FC = () => {
       setCurrentPage(page);
     }
   };
+
   // Current page items
   const startIndex = (currentPage - 1) * selectOption + 1;
   const endIndex = Math.min(startIndex + selectOption - 1, 42);
@@ -55,7 +57,7 @@ export const App: React.FC = () => {
       </div>
 
       <Pagination
-        total={42}
+        total={totalItems}
         perPage={selectOption}
         currentPage={currentPage}
         onPageChange={handlePageChange}
@@ -63,4 +65,5 @@ export const App: React.FC = () => {
     </div>
   );
 };
+
 export default App;

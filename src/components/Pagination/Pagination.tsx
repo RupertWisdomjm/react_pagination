@@ -7,11 +7,16 @@ interface Props {
   onPageChange: (page: number, pages: number) => void;
 }
 
-const items = getNumbers(1, 42).map((n: number) => `Item ${n}`);
+export const Pagination = ({
+  perPage,
+  currentPage,
+  onPageChange,
+  total,
+}: Props) => {
+  const items = getNumbers(1, total).map((n: number) => `Item ${n}`);
 
-export const Pagination = ({ perPage, currentPage, onPageChange }: Props) => {
   //Number of items
-  const pages = Math.ceil(items.length / perPage);
+  const pages = Math.ceil(total / perPage);
 
   //Pagination
   const links = getNumbers(1, pages);
@@ -23,6 +28,7 @@ export const Pagination = ({ perPage, currentPage, onPageChange }: Props) => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
+
   return (
     <>
       <ul className="pagination">
